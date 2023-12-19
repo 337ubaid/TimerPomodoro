@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         backgroundColor: AppColor.primaryColor,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
+          preferredSize: Size.fromHeight(32),
           child: MoveWindow(
             child: AppBar(
               actions: [
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text(
                 DateFormat('EEEE, dd MMM yyyy')
                     .format(DateTime.now().add(Duration(hours: 7))),
-                style: TextStyle(color: Colors.white, fontSize: 12),
+                style: TextStyle(color: Colors.white, fontSize: 8),
                 // textAlign: TextAlign.center,
               ),
             ),
@@ -77,12 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextStyle(
                   color: Colors.white,
                   backgroundColor: AppColor.secondaryColor,
-                  fontSize: max(64, MediaQuery.of(context).size.width / 8)),
+                  // fontSize: max(64, MediaQuery.of(context).size.width / 8)),
+                  fontSize: 40),
             ),
             SizedBox(
               height: 24,
               child: Container(
-                color: Colors.white, // Warna yang diinginkan
+                color:
+                    Color.fromARGB(255, 168, 63, 63), // Warna yang diinginkan
               ),
             ),
             Container(

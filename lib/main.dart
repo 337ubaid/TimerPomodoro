@@ -1,6 +1,7 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:timer/screens/home_screen.dart';
+import 'package:timer/screens/timer_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -8,10 +9,10 @@ void main() async {
   runApp(const MyApp());
   doWhenWindowReady(() {
     final win = appWindow;
-    final initialSize = Size(250, 300);
+    final initialSize = Size(268, 80);
     win.minSize = initialSize;
     win.size = initialSize;
-    win.alignment = Alignment.center;
+    win.alignment = Alignment.topLeft;
     win.title = "";
     win.show();
   });
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const TimerScreen(),
+      // home: const HomeScreen(),
     );
   }
 }
