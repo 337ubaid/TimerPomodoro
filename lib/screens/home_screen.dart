@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'dart:math';
 
@@ -18,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int time = 25;
   int breakTime = 5;
   Timer? timer;
-  int counter = 25 * 60;
+  int counter = 0;
 
   /* setting the start function */
   void startTimer(int timeInMinutes) {
@@ -42,23 +44,24 @@ class _HomeScreenState extends State<HomeScreen> {
           preferredSize: Size.fromHeight(kToolbarHeight),
           child: MoveWindow(
             child: AppBar(
-              // actions: [
-              //   Transform.scale(
-              //     scale: 1,
-              //     child: MinimizeWindowButton(),
-              //   ),
-              //   Transform.scale(
-              //     scale: 0.8,
-              //     child: CloseWindowButton(),
-              //   ),
-              // ],
-              elevation: 0.0,
-              backgroundColor: AppColor.primaryColor,
-              centerTitle: true,
+              actions: [
+                Transform.scale(
+                  scale: 1,
+                  child: MinimizeWindowButton(),
+                ),
+                Transform.scale(
+                  scale: 1,
+                  child: CloseWindowButton(),
+                ),
+              ],
+              // elevation: 0.0,
+              backgroundColor: AppColor.secondaryColor,
+              // centerTitle: true,
               title: Text(
-                '${DateFormat('EEEE\ndd MMM yyyy').format(DateTime.now().add(Duration(hours: 7)))}',
+                DateFormat('EEEE, dd MMM yyyy')
+                    .format(DateTime.now().add(Duration(hours: 7))),
                 style: TextStyle(color: Colors.white, fontSize: 12),
-                textAlign: TextAlign.center,
+                // textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -73,83 +76,96 @@ class _HomeScreenState extends State<HomeScreen> {
               "${counter ~/ 60 < 10 ? "0" + (counter ~/ 60).toString() : counter ~/ 60}:${counter % 60 < 10 ? "0" + (counter % 60).toString() : counter % 60}",
               style: TextStyle(
                   color: Colors.white,
+                  backgroundColor: AppColor.secondaryColor,
                   fontSize: max(64, MediaQuery.of(context).size.width / 8)),
             ),
             SizedBox(
               height: 24,
+              child: Container(
+                color: Colors.white, // Warna yang diinginkan
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                RawMaterialButton(
-                  onPressed: () {
-                    //Setting the Start Button Function
-                    setState(() {
-                      if (timer != null) {
-                        timer!.cancel();
-                      }
-                    });
-                    startTimer(25);
-                  },
-                  fillColor: AppColor.secondaryColor,
-                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  shape: StadiumBorder(),
-                  child: Text(
-                    "Start",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+            Container(
+              color: Colors.blue, // Ganti dengan warna yang diinginkan
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  RawMaterialButton(
+                    onPressed: () {
+                      //Setting the Start Button Function
+                      setState(() {
+                        if (timer != null) {
+                          timer!.cancel();
+                        }
+                      });
+                      startTimer(25);
+                    },
+                    fillColor: AppColor.secondaryColor,
+                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    shape: StadiumBorder(),
+                    child: Text(
+                      "Start",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                RawMaterialButton(
-                  onPressed: () {
-                    //Setting the Break Button Function
-                    setState(() {
-                      if (timer != null) {
-                        timer!.cancel();
-                      }
-                    });
-                    startTimer(5);
-                  },
-                  fillColor: AppColor.secondaryColor,
-                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  shape: StadiumBorder(),
-                  child: Text(
-                    "Break",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  SizedBox(
+                    width: 20,
+                    child: Container(
+                      color: Colors.white, // Warna yang diinginkan
+                    ),
                   ),
-                ),
-              ],
+                  RawMaterialButton(
+                    onPressed: () {
+                      //Setting the Break Button Function
+                      setState(() {
+                        if (timer != null) {
+                          timer!.cancel();
+                        }
+                      });
+                      startTimer(5);
+                    },
+                    fillColor: AppColor.secondaryColor,
+                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    shape: StadiumBorder(),
+                    child: Text(
+                      "Break",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            StreamBuilder<DateTime>(
-              stream:
-                  Stream.periodic(Duration(seconds: 1), (_) => DateTime.now()),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final currentTime = snapshot.data!;
-                  final formattedTime = DateFormat.Hms().format(currentTime);
-                  return Text(
-                    formattedTime,
-                    style: TextStyle(
-                      color: AppColor.secondaryColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                } else {
-                  return Text(
-                    'Loading...',
-                    style: TextStyle(
-                      color: AppColor.secondaryColor,
-                      fontSize: 14,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                }
-              },
+            Container(
+              color: Colors.white,
+              child: StreamBuilder<DateTime>(
+                stream: Stream.periodic(
+                    Duration(seconds: 1), (_) => DateTime.now()),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final currentTime = snapshot.data!;
+                    final formattedTime = DateFormat.Hms().format(currentTime);
+                    return Text(
+                      formattedTime,
+                      style: TextStyle(
+                        color: AppColor.secondaryColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  } else {
+                    return Text(
+                      'Loading...',
+                      style: TextStyle(
+                        color: AppColor.secondaryColor,
+                        fontSize: 14,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
           ],
         ));
