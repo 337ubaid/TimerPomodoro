@@ -1,6 +1,6 @@
-# timer
+# Pomodoro Timer
 
-A new Flutter project.
+make for fun windows app pomodoro timer. Study for 25 minutes and break 5 minutes.
 
 ## Getting Started
 
