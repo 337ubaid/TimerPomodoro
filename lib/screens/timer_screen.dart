@@ -16,6 +16,10 @@ class TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> {
+  int time = 25;
+  int breakTime = 5;
+  Timer? timer;
+  int counter = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,15 +39,20 @@ class _TimerScreenState extends State<TimerScreen> {
               ),
             ],
             // elevation: 0.0,
-            backgroundColor: AppColor.secondaryColor,
+            backgroundColor: AppColor.primaryColor,
           ),
         ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          //make center for entire items
           Container(
-            width: 268,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+            ),
           ),
           Text(
             "25:00",
@@ -53,6 +62,37 @@ class _TimerScreenState extends State<TimerScreen> {
               // backgroundColor: AppColor.secondaryColor,
             ),
             textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: 24,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                RawMaterialButton(
+                  fillColor: AppColor.secondaryColor,
+                  onPressed: () {},
+                  child: Text(
+                    "Start",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                RawMaterialButton(
+                  onPressed: () {},
+                  fillColor: Colors.red,
+                  child: Text(
+                    "Stop",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

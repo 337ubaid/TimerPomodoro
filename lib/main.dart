@@ -9,7 +9,7 @@ void main() async {
   runApp(const MyApp());
   doWhenWindowReady(() {
     final win = appWindow;
-    final initialSize = Size(268, 80);
+    final initialSize = Size(268, 104);
     win.minSize = initialSize;
     win.size = initialSize;
     win.alignment = Alignment.topLeft;
